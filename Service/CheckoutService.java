@@ -12,8 +12,15 @@ public class CheckoutService {
     }
 
     public void scanItem(char item) {
+        PricingRule rule = pricingRules.get(item);
+        if (rule == null) {
+            // If the item is not found in the rules, ignore it
+            System.out.println("Item '" + item + "' is not valid and will be ignored.");
+            return;
+        }
         itemCounts.put(item, itemCounts.getOrDefault(item, 0) + 1);
     }
+    
 
     public int calculateTotal() {
         int total = 0;
